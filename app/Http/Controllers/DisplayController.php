@@ -25,9 +25,9 @@ class DisplayController extends Controller
         return view('reading', ['items' => $items]);
     }
 
-    public function edit()
+    public function edit(Item $item)
     {
-        return view('edit');
+        return view('edit', ['item' => $item]);
     }
     public function create()
     {

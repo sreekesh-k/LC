@@ -21,8 +21,8 @@ Route::get('/reading', [DisplayController::class, 'reading'])->name('reading');
 Route::get('/create', [DisplayController::class, 'create'])->name('create');
 Route::post('/create', [ItemController::class, 'create'])->name('create.post');
 
-Route::get('/edit', [DisplayController::class, 'edit'])->name('edit');
-Route::post('/edit', [ItemController::class, 'edit'])->name('edit.post');
+Route::get('/edit/{item}', [DisplayController::class, 'edit'])->name('edit');
+Route::post('/edit/{item}', [ItemController::class, 'edit'])->name('edit.post');
 
 
-Route::get('/delete', [DisplayController::class, 'delete'])->name('delete');
+Route::get('/delete/{item}', [ItemController::class, 'delete'])->name('delete');

@@ -7,8 +7,14 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    public function edit()
+    public function edit(Request $request, Item $item)
     {
+        $data = $request->validate([
+            'name' => 'required',
+            'quantity' => 'required'
+        ]);
+        $item->update($data);
+        return redirect()->intended(route('reading'))->with('Success', 'Updated');
     }
     public function create(Request $request)
     {
@@ -17,12 +23,15 @@ class ItemController extends Controller
             'quantity' => 'required'
         ]);
         $newitem = Item::create($data);
-        if(!$newitem){
-            return redirect(route('create'))->with('Error','Couldnt process');
+        if (!$newitem) {
+            return redirect(route('create'))->with('Error', 'Couldnt process');
         }
-        return redirect()->intended(route('reading'));
+        return redirect()->intended(route('reading'))->with('Success', 'Added');
     }
-    public function detele()
+    public function delete(Item $item)
     {
+        $item->delete();
+        return redirect()->intended(route('reading'))->with('Success', 'Deleted');
     }
+
 }
