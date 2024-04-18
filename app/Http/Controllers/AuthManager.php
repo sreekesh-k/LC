@@ -20,6 +20,7 @@ class AuthManager extends Controller
         if (Auth::attempt($cred)) {
             return redirect()->intended(route('reading'));
         }
+        return redirect(route('login'))->with('Error', 'invalid credintials');
     }
     public function register(Request $request)
     {
@@ -29,8 +30,11 @@ class AuthManager extends Controller
             'password' => 'required'
         ]);
         $data['password'] = Hash::make($request->password);
-        $newUser = User::create($data);
-        return redirect()->intended(route('login'));
+        $user = User::create($data);
+        if (!$user) {
+            return redirect(route('register'))->with("Error", "Couldnt Register");
+        }
+        return redirect()->intended(route('login'))->with("Success", "You can now login");
     }
     public function logout()
     {

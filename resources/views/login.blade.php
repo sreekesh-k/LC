@@ -14,5 +14,20 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <div class='mt-5'>
+            @if ($errors->any())
+                <div class="col-12">
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger">{{ $error }}</div>
+                    @endforeach
+                </div>
+            @endif
+            @if (session()->has('Error'))
+                <div class="alert alert-danger">{{ session('Error') }}</div>
+            @endif
+            @if (session()->has('Success'))
+                <div class="alert alert-success">{{ session('Success') }}</div>
+            @endif
+        </div>
     </div>
 @endsection
