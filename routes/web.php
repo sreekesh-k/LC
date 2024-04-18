@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\DisplayController;
+use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DisplayController::class, 'home'])->name('home');
@@ -15,5 +16,13 @@ Route::post('/register', [AuthManager::class, 'register'])->name('register.post'
 
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 
-
 Route::get('/reading', [DisplayController::class, 'reading'])->name('reading');
+
+Route::get('/create', [DisplayController::class, 'create'])->name('create');
+Route::post('/create', [ItemController::class, 'create'])->name('create.post');
+
+Route::get('/edit', [DisplayController::class, 'edit'])->name('edit');
+Route::post('/edit', [ItemController::class, 'edit'])->name('edit.post');
+
+
+Route::get('/delete', [DisplayController::class, 'delete'])->name('delete');
